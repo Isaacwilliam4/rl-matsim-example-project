@@ -8,10 +8,10 @@
 		<param name="overwriteFiles" value="deleteDirectoryIfExists" />
 	</module>
 	<module name="network" >
-		<param name="inputNetworkFile" value="utah_network_cleanv2.xml" />
+		<param name="inputNetworkFile" value="utah_readme_output.xml" />
 	</module>
 	<module name="plans" >
-		<param name="inputPlansFile" value="utah_network_plan.xml" />
+		<param name="inputPlansFile" value="readme_plans.xml" />
 	</module>
 	<module name="qsim" >
 		<param name="endTime" value="00:00:00" />
