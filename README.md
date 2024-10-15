@@ -67,3 +67,127 @@ The **MATSim input files, output files, analysis data and visualizations** are l
 **Other data files**, in particular in `original-input-data`, have their own individual licenses that need to be individually clarified with the copyright holders.
 
 
+# Working with MATSim - Isaac
+
+This guide explains how to get a real-world network into MATSim, generate a population, and run a simulation. It assumes that you have the .jar executable compiled and ready to use.
+
+## Getting a Real Network in MATSim
+
+### Step 1: Download the Network
+
+1. Visit [JOSM's website](https://josm.openstreetmap.de/) and download the `josm-tested.jar` file.
+2. Run JOSM with the following command:
+
+   ```bash
+   java -jar josm-tested.jar
+   ```
+
+3. The JOSM interface should appear:
+   
+   ![JOSM home](figs/josm_home.png)
+
+4. Enable expert mode by clicking on **View** and checking the **Expert mode** box.
+
+5. Navigate to **File → Download Data**. In the download window, switch to the **Download from Overpass API** tab and enter a query.
+
+### Example Overpass API Query
+
+To download a bounding box of road data for the state of Utah, use:
+
+```plaintext
+[out:xml];
+(
+  way["highway"~"motorway|trunk"](39.647,-112.543,41.894,-111.148); //(min latitude, min longitude, max latitude, max longitude)
+);
+out body;
+>;
+out skel qt;
+```
+
+You can customize this query to include additional roadway types beyond `motorway` and `trunk`. The [Overpass API documentation](https://wiki.openstreetmap.org/wiki/Overpass_API) has more information.
+
+#### Common Road Types:
+
+- **motorway**: Highways or freeways with controlled access.
+- **trunk**: Major roads that aren't motorways.
+- **primary**, **secondary**, **tertiary**: Roads of varying levels of importance.
+- **residential**: Streets within residential areas.
+- **living_street**: Streets primarily for pedestrians with limited vehicle access.
+- **service**: Roads for accessing buildings, parking lots, etc.
+- **footway**, **cycleway**, **path**: Paths for pedestrians and cyclists.
+- **track**: Roads mainly used for agricultural or forestry purposes.
+- **unclassified**: Roads without a specific classification.
+
+### Step 2: Edit the Network
+
+In the JOSM editor, you can make sure that roads are connected properly. To display the map background, go to **Imagery → OpenStreetMap Carto (Standard)**.
+
+![JOSM editor](figs/josm_editor.png)
+
+Once you're satisfied with the network, save it by going to **File → Save As** and choosing `.osm` as the file format.
+
+## Cleaning the .osm File
+
+Use the script provided in `python/scripts/` named `clean_osm_data.py` to clean the `.osm` file. An example of how to run the script:
+
+```bash
+python python/scripts/clean_osm_data.py --input path/to/input_graph.osm --output path/to/cleaned_graph.osm
+```
+
+The cleaned `.osm` file can now be converted to a MATSim-compatible `.xml` file.
+
+## Converting .osm to MATSim-Compatible .xml
+
+Use the [osm2matsim converter](https://github.com/gustavocovas/osm2matsim), included in this repository at `/osm2matsim`. Place your `.osm` file in the `osm2matsim/input` directory for simplicity. To convert:
+
+```bash
+cd osm2matsim
+./bin/convert.sh input/input.osm output/output.xml
+```
+
+## Generating a Population
+
+Now that you have a MATSim-compatible network `.xml`, you can generate a population:
+
+```bash
+python python/scripts/create_population.py --input path/to/matsimnetwork.xml --output path/to/matsimplansoutput.xml --numagents 100
+```
+
+The above command generates travel plans for 100 agents.
+
+## Running MATSim
+
+With a network and population ready, you can start the MATSim simulation. Run the .jar file as follows:
+
+```bash
+java -jar matsim-example-project-0.0.1-SNAPSHOT.jar
+```
+
+When the MATSim GUI appears, it will prompt you to load a `config.xml` file. Example configurations can be found in `scenarios/utah/utah_config.xml`. Update the `inputNetworkFile` and `inputPlansFile` parameters in the configuration with the paths to your generated `network.xml` and `plans.xml`.
+
+Once the configuration is loaded, click **Start MATSim**. After the simulation completes, an output directory will be created near the location of your `config.xml` file.
+
+## Visualizing the Simulation
+
+To visualize the simulation results, use [Via](https://www.simunto.com/via/download.html). The Via runnable is included in this repository. To start it:
+
+```bash
+./Via-24.1.0/via
+```
+
+You may need a license to use Via. A free license can be obtained [here](https://www.simunto.com/via/licenses/free), which allows visualization of up to 500 agents.
+
+Once Via is open:
+
+1. In the **Controls:** tab, click the paper icon labeled **Data Sources**, then click the `+` icon at the bottom.
+2. Navigate to the MATSim output folder and add the `output_network.xml.gz` file.
+3. Repeat the process to add the `output_events.xml.gz` file.
+4. Switch to the **Controls: Layers** tab, click the `+` icon, select **Network**, and click **Add**. The network should appear.
+
+![Via net](figs/vianet.png)
+
+Next, add the **Vehicle From Events** layer and click **Load Data**. You can adjust the simulation speed at the bottom right of the interface to see green agents moving throughout the day.
+
+---
+
+This guide provides a structured approach to setting up and running MATSim simulations using real-world networks. Each step ensures the preparation of the network, population, and visualization of the simulation results.
