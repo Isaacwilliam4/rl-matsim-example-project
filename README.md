@@ -188,6 +188,19 @@ Once Via is open:
 
 Next, add the **Vehicle From Events** layer and click **Load Data**. You can adjust the simulation speed at the bottom right of the interface to see green agents moving throughout the day.
 
+
+---
+
+# Important info
+
+In the source code for matsim, the scoring functions are located at 
+
+```
+/matsim-libs/matsim/src/main/java/org/matsim/core/scoring/functions
+```
+
+The chapter in the matsim book on electric vehicles starts on page 93.
+
 ---
 
 This guide provides a structured approach to setting up and running MATSim simulations using real-world networks. Each step ensures the preparation of the network, population, and visualization of the simulation results.
