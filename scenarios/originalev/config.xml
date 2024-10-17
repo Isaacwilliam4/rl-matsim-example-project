@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE config SYSTEM "http://www.matsim.org/files/dtd/config_v2.dtd">
 <config>
+
     <module name="ev">
         <param name="auxDischargeTimeStep" value="10"/>
         <param name="chargeTimeStep" value="5"/>
@@ -23,7 +24,8 @@
     </module>
 
     <module name="plans">
-        <param name="inputPlansFile" value="1kagentspopulation.xml"/>
+        <param name="inputPlansFile" value="chargingpopulation.xml"/>
+        <param name="handlingOfPlansWithoutRoutingMode" value="useMainModeIdentifier"/>
     </module>
 
     <module name="controler">
@@ -71,12 +73,12 @@
 		</parameterset>
 
         <parameterset type="activityParams">
-            <param name="activityType" value="c"/>
+            <param name="activityType" value="car charging interaction"/> <!-- car charging interaction -->
             <param name="typicalDuration" value="01:30:00"/>
             <param name="openingTime" value="07:30:00"/>
             <param name="closingTime" value="21:30:00"/>
             <param name="typicalDurationScoreComputation" value="relative"/>
-            <param name="scoringThisActivityAtAll" value="true"/>
+            <param name="scoringThisActivityAtAll" value="false"/>
 
         </parameterset>
 
