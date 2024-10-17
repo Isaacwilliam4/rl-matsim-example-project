@@ -8,10 +8,20 @@ def add_large_files_to_gitignore():
     # Get the current working directory
     current_directory = os.getcwd()
     gitignore_path = os.path.join(current_directory, '.gitignore')
+    og_large_files = set()
 
+    with open(gitignore_path, 'r') as gitignore_file:
+        line = gitignore_file.readline().strip()
+        while "___MANUALADDFILES___" not in line:
+            line = gitignore_file.readline()
+        while True:
+            line = gitignore_file.readline()
+            if line == '':
+                break
+            og_large_files.add(line.strip())
+    
     # Set to store large files to add to .gitignore
     large_files = set()
-
     # Walk through all files in the directory
     for root, dirs, files in os.walk(current_directory):
         for file in files:
@@ -23,7 +33,10 @@ def add_large_files_to_gitignore():
             if os.path.isfile(file_path) and os.path.getsize(file_path) > SIZE_LIMIT:
                 # Add the file path to the set of large files
                 relative_path = os.path.relpath(file_path, current_directory)
-                large_files.add(relative_path)
+                filename = os.path.basename(relative_path)
+
+                if filename not in og_large_files:
+                  large_files.add(filename)
 
     # Add the large files to .gitignore
     if large_files:
