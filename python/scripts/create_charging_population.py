@@ -92,9 +92,15 @@ def create_population_and_plans_xml(num_agents, node_coords, link_to_node, charg
         # Define the agent's activities and legs
         home_activity = ET.SubElement(plan, "act", type="h", 
                                       x=str(home_node[0]), y=str(home_node[1]), end_time="08:00:00")
-        leg_to_work = ET.SubElement(plan, "leg", mode="car")
-        work_activity = ET.SubElement(plan, "act", type="w", 
-                                      x=str(work_node[0]), y=str(work_node[1]), start_time="08:30:00", end_time="17:00:00")
+        # Add the charging activity with x and y coordinates
+        charging_activity = ET.SubElement(plan, "act", type="car charging interaction", 
+                                            link=charger_link_id, 
+                                            x=str(charger_coords[0]), 
+                                            y=str(charger_coords[1]), 
+                                            end_time="20:30:00")
+        leg_to_home = ET.SubElement(plan, "leg", mode="car")
+        home_activity_2 = ET.SubElement(plan, "act", type="h", 
+                                            x=str(home_node[0]), y=str(home_node[1]))
 
         # Optionally add a charging stop
         if random.random() < 0.5:  # 50% chance the agent needs to charge

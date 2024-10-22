@@ -203,4 +203,9 @@ The chapter in the matsim book on electric vehicles starts on page 93.
 
 ---
 
-This guide provides a structured approach to setting up and running MATSim simulations using real-world networks. Each step ensures the preparation of the network, population, and visualization of the simulation results.
+Running the simulation with the electric vehicle extension can be done as follows
+
+```
+java -cp matsim-example-project-0.0.1-SNAPSHOT.jar org.matsim.contrib.ev.example.RunEvExample ./scenarios/originalev/evconfig.xml
+```
+
