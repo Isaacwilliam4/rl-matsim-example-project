@@ -1,4 +1,4 @@
 pattern	0+	5+	10+	15+	20+	25+	30+	35+	40+	45+	50+	55+	60+
-h---h	0	0	0	1	0	0	0	1	1	0	1	1	10
+h---h	0	0	1	2	2	1	0	1	1	4	3	0	35
 
-average leg duration: 5061.666666666667 seconds = 01:24:21
+average leg duration: 4990.86 seconds = 01:23:10

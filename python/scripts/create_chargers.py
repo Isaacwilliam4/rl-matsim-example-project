@@ -6,11 +6,16 @@ import os
 parser = argparse.ArgumentParser(description='Generate population and plans XML files')
 
 parser.add_argument('--input', type=str, help='Input matsim xml network', required=True)
-parser.add_argument('--output', type=str, help='Output path of plans network', required=True)
-parser.add_argument('--numchargers', type=int, help='Number of chargers to generate', required=True)
+parser.add_argument('--output', type=str, help='Output path of chargers xml file', required=True)
+parser.add_argument('--numchargers', type=int, help='Number of chargers to generate')
+parser.add_argument('--percent', type=int, help='Percentage of links to place chargers on')
+
 
 
 args = parser.parse_args()
+
+if args.numchargers is None and args.percent is None:
+    raise ValueError("Either --numchargers or --percent must be specified")
 
 
 def load_network_xml(network_file):
@@ -40,7 +45,6 @@ def create_population_and_plans_xml(num_chargers, link_ids, output_file_path):
         link_id = random.choice(link_ids)
         charger = ET.SubElement(chargers, "charger", id=str(i), link=link_id, plug_power="100.0", plug_count="5")
 
-
     # Convert the ElementTree to a string
     tree = ET.ElementTree(chargers)
 
@@ -53,5 +57,13 @@ def create_population_and_plans_xml(num_chargers, link_ids, output_file_path):
         # Write the tree structure
         tree.write(f)
 
+    print(f"{num_chargers} chargers written to {output_file_path}")
+
 link_ids = load_network_xml(os.path.abspath(args.input))
-create_population_and_plans_xml(args.numchargers, link_ids, os.path.abspath(args.output))
+
+if args.numchargers is not None:
+    numchargers = args.numchargers
+else:
+    num_links = len(link_ids)
+    numchargers = int(num_links * (args.percent / 100))
+create_population_and_plans_xml(numchargers, link_ids, os.path.abspath(args.output))

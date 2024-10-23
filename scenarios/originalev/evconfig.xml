@@ -5,7 +5,7 @@
     <module name="ev">
         <param name="auxDischargeTimeStep" value="10"/>
         <param name="chargeTimeStep" value="5"/>
-        <param name="chargersFile" value="evchargers.xml"/>
+        <param name="chargersFile" value="evchargers1.xml"/>
         <param name="timeProfiles" value="true"/>
 	</module>
 
@@ -24,14 +24,14 @@
     </module>
 
     <module name="plans">
-        <param name="inputPlansFile" value="agent15pop.xml"/>
+        <param name="inputPlansFile" value="evpopulation5.xml"/>
         <param name="handlingOfPlansWithoutRoutingMode" value="useMainModeIdentifier"/>
     </module>
 
     <module name="controler">
         <param name="outputDirectory" value="./scenarios/originalev/evexample"/>
         <param name="firstIteration" value="0"/>
-        <param name="lastIteration" value="20"/>
+        <param name="lastIteration" value="5"/>
         <param name="eventsFileFormat" value="xml"/>
         <param name="mobsim" value="qsim"/>
     </module>

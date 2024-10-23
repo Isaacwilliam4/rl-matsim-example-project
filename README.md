@@ -209,3 +209,6 @@ Running the simulation with the electric vehicle extension can be done as follow
 java -cp matsim-example-project-0.0.1-SNAPSHOT.jar org.matsim.contrib.ev.example.RunEvExample ./scenarios/originalev/evconfig.xml
 ```
 
+FORMATING THE XML FILES CAN MAKE THEM UNINTERPRETABLE BY MATSIM. So if you use a formatter
+like prettyxml or something, it makes crucial changes to the xml files that makes them unreadable
+by matsim, it only took me like 3 hours to figure this out.
