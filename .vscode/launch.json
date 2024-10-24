@@ -5,6 +5,14 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "Run Ev Matsim",
+      "request": "launch",
+      "mainClass": "/home/isaacpeterson/research/repos/rl-matsim-example-project/matsim-libs/contribs/ev/src/main/java/org/matsim/contrib/ev/example/RunEvExampleWithEvScoring.java",
+      "vmArgs": "-Xms10g -Xmx20g",
+      "args": ["/home/isaacpeterson/research/repos/rl-matsim-example-project/scenarios/tinytown/ev_tiny_town_config.xml"]
+    },
+    {
       "name": "Python Debugger: Current File",
       "type": "debugpy",
       "request": "launch",
