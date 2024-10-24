@@ -29,7 +29,7 @@
     </module>
 
     <module name="controler">
-        <param name="outputDirectory" value="./scenarios/originalev/evexample"/>
+        <param name="outputDirectory" value="./scenarios/originalev/output"/>
         <param name="firstIteration" value="0"/>
         <param name="lastIteration" value="5"/>
         <param name="eventsFileFormat" value="xml"/>
