@@ -56,13 +56,13 @@ def create_population_and_plans_xml(num_agents, node_coords, output_file_path):
 
         # Define the agent's activities and legs
         home_activity = ET.SubElement(plan, "act", type="h", 
-                                      x=str(origin_node[0]), y=str(origin_node[1]), end_time="01:00:00")
+                                      x=str(origin_node[0]), y=str(origin_node[1]), end_time="09:00:00")
         leg_to_work = ET.SubElement(plan, "leg", mode="car")
         home_activity_2 = ET.SubElement(plan, "act", type="h", 
-                                        x=str(dest_node_id[0]), y=str(dest_node_id[1]))
-        # leg_to_home = ET.SubElement(plan, "leg", mode="car")
-        # return_home_act = ET.SubElement(plan, "act", type="h", 
-        #                         x=str(dest_node_id[1]), y=str(dest_node_id[0]))
+                                        x=str(dest_node_id[0]), y=str(dest_node_id[1]), end_time="18:00:00")
+        leg_to_home = ET.SubElement(plan, "leg", mode="car")
+        return_home_act = ET.SubElement(plan, "act", type="h", 
+                                x=str(dest_node_id[1]), y=str(dest_node_id[0]))
         
 
     # Convert the ElementTree to a string

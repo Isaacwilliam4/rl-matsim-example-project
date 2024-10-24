@@ -150,7 +150,7 @@
 		</parameterset>
 	</module>
 	<module name="vehicles" >
-		<param name="vehiclesFile" value="tiny_town_evehiclestest.xml" />
+		<param name="vehiclesFile" value="tiny_town_evehicles.xml" />
 	</module>
 
 </config>
