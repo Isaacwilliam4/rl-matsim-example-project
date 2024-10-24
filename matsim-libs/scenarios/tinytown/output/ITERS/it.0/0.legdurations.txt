@@ -1,0 +1,6 @@
+pattern	0+	5+	10+	15+	20+	25+	30+	35+	40+	45+	50+	55+	60+
+car charging interaction---h	3	0	0	0	0	0	0	0	0	0	0	0	0
+h---car charging interaction	1	2	0	0	0	0	0	0	0	0	0	0	0
+h---h	3	13	1	0	0	0	0	0	0	0	0	0	0
+
+average leg duration: 356.69565217391306 seconds = 00:05:56

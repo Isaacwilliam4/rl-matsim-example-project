@@ -1,0 +1,10 @@
+2024-10-23T18:56:05,003  WARN PrepareForSimImpl:265 'usePersonIdForMissingVehicleId' is deprecated. It will be removed soon.
+2024-10-23T18:56:05,034  WARN RandomizingTimeDistanceTravelDisutilityFactory:113 There will be no routing randomness. The randomization of the travel disutility requires the monetary distance rate to be different than zero. Continuing anyway.
+2024-10-23T18:56:05,034  WARN RandomizingTimeDistanceTravelDisutilityFactory:118 There will be no routing randomness. The randomization of the travel disutility requires the travel time cost rate to be different than zero. Continuing anyway.
+2024-10-23T18:56:12,844  WARN CharyparNagelActivityScoring:271 The first and the last activity do not have the same type. 
+2024-10-23T18:56:12,844  WARN CharyparNagelActivityScoring:272 Will score the first activity from midnight to its end, and the last activity from its start to midnight.
+2024-10-23T18:56:12,844  WARN CharyparNagelActivityScoring:273 Because of the nonlinear function, this is not the same as scoring from start to end.
+2024-10-23T18:56:12,845  WARN CharyparNagelActivityScoring:274 first activity: act [type=h][coord=[x=-1.4447634496565208E7 | y=3989705.649773882]][linkId=305][startTime=undefined][endTime=09:00:00][duration=undefined][facilityId=null]
+2024-10-23T18:56:12,845  WARN CharyparNagelActivityScoring:275 last activity: act [type=car charging interaction][coord=[x=-1.4443211855908604E7 | y=3986330.011095998]][linkId=3297][startTime=23:08:54][endTime=undefined][duration=undefined][facilityId=null]
+2024-10-23T18:56:12,845  WARN CharyparNagelActivityScoring:276 This may also happen when plans are not completed when the simulation ends.
+2024-10-23T18:56:12,845  WARN CharyparNagelActivityScoring:278 Additional warnings of this type are suppressed.

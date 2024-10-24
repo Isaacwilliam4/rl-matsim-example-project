@@ -1,0 +1,2 @@
+chargerId;vehicleId;linkId;waitStartTime;waitEndTime;waitDuration;chargeStartTime;chargeEndTime;chargingDuration;energyTransmitted_kWh
+685;13;38894069_0_r;00:00:00;00:00:00;00:00:00;10:44:09;11:33:54;00:49:45;53.8

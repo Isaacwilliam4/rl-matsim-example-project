@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config SYSTEM "http://www.matsim.org/files/dtd/config_v2.dtd">
+<config>
+	<module name="controller" >
+		<!-- Default=1000. Last Iteration of a simulation. -->
+		<param name="lastIteration" value="5" />
+		<param name="outputDirectory" value="./scenarios/originalev/evexample" />
+		<!-- Possible values: failIfDirectoryExists,overwriteExistingFiles,deleteDirectoryIfExists -->
+		<param name="overwriteFiles" value="deleteDirectoryIfExists" />
+	</module>
+	<module name="ev" >
+		<!-- AUX discharging will be simulated every 'auxDischargeTimeStep'-th time step -->
+		<param name="auxDischargeTimeStep" value="10" />
+		<!-- charging will be simulated every 'chargeTimeStep'-th time step -->
+		<param name="chargeTimeStep" value="5" />
+		<!-- Location of the chargers file -->
+		<param name="chargersFile" value="evchargers1.xml" />
+		<!-- If true, prolongs the charging interaction for the amount of time waiting in the charger queue (plus 1 second), i.e.enforces that charging interactions are undertaken as long as initially planned (by EVNetworkRoutingModule). Default is false. -->
+		<param name="enforceChargingInteractionDuration" value="false" />
+		<!-- Minimum activity duration for charging. Used in EvNetwork Routing. -->
+		<param name="minChargingTime" value="1200" />
+		<!-- Number of individual time profiles to be created -->
+		<param name="numberOfIndividualTimeProfiles" value="50" />
+		<!-- If true, charge/SoC time profile plots will be created -->
+		<param name="timeProfiles" value="true" />
+		<!-- determines whether the resulting SoC at the end of the iteration X is set to be the initial SoCin iteration X+1 for each EV. If set to true, bear in mind that EV might start with 0% battery charge. -->
+		<param name="transferFinalSoCToNextIteration" value="false" />
+	</module>
+	<module name="network" >
+		<param name="inputNetworkFile" value="evnetwork.xml" />
+	</module>
+	<module name="plans" >
+		<!-- Possible values: reject,useMainModeIdentifier -->
+		<param name="handlingOfPlansWithoutRoutingMode" value="useMainModeIdentifier" />
+		<param name="inputPlansFile" value="agent15pop.xml" />
+	</module>
+	<module name="qsim" >
+		<param name="endTime" value="24:00:00" />
+		<!-- Options: maxOfStarttimeAndEarliestActivityEnd onlyUseStarttime  -->
+		<param name="simStarttimeInterpretation" value="onlyUseStarttime" />
+		<param name="startTime" value="00:00:00" />
+	</module>
+	<module name="replanning" >
+		<parameterset type="strategysettings" >
+			<!-- strategyName of strategy.  Possible default names: SelectRandom BestScore KeepLastSelected ChangeExpBeta SelectExpBeta SelectPathSizeLogit      (selectors), ReRouteTimeAllocationMutatorTimeAllocationMutator_ReRouteChangeSingleTripModeChangeTripModeSubtourModeChoice (innovative strategies). -->
+			<param name="strategyName" value="BestScore" />
+			<!-- weight of a strategy: for each agent, a strategy will be selected with a probability proportional to its weight -->
+			<param name="weight" value="0.6" />
+		</parameterset>
+		<parameterset type="strategysettings" >
+			<param name="strategyName" value="ReRoute" />
+			<param name="weight" value="0.4" />
+		</parameterset>
+	</module>
+	<module name="routing" >
+		<parameterset type="teleportedModeParameters" >
+			<param name="mode" value="bike" />
+		</parameterset>
+		<parameterset type="teleportedModeParameters" >
+			<param name="mode" value="walk" />
+		</parameterset>
+		<parameterset type="teleportedModeParameters" >
+			<param name="mode" value="non_network_walk" />
+		</parameterset>
+		<parameterset type="teleportedModeParameters" >
+			<param name="mode" value="ride" />
+		</parameterset>
+		<parameterset type="teleportedModeParameters" >
+			<param name="mode" value="pt" />
+		</parameterset>
+	</module>
+	<module name="scoring" >
+		<!-- logit model scale parameter. default: 1.  Has name and default value for historical reasons (see Bryan Raney's phd thesis). -->
+		<param name="brainExpBeta" value="2.0" />
+		<parameterset type="scoringParameters" >
+			<parameterset type="activityParams" >
+				<param name="activityType" value="dummy" />
+				<!-- typical duration of activity.  needs to be defined and non-zero.  in sec. -->
+				<param name="typicalDuration" value="02:00:00" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="car interaction" />
+				<param name="typicalDuration" value="undefined" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="pt interaction" />
+				<param name="typicalDuration" value="undefined" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="bike interaction" />
+				<param name="typicalDuration" value="undefined" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="drt interaction" />
+				<param name="typicalDuration" value="undefined" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="taxi interaction" />
+				<param name="typicalDuration" value="undefined" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="other interaction" />
+				<param name="typicalDuration" value="undefined" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="walk interaction" />
+				<param name="typicalDuration" value="undefined" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="h" />
+				<param name="typicalDuration" value="22:00:00" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="w" />
+				<param name="closingTime" value="18:00:00" />
+				<param name="latestStartTime" value="09:00:00" />
+				<param name="openingTime" value="07:00:00" />
+				<param name="typicalDuration" value="08:00:00" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="car charging interaction" />
+				<param name="closingTime" value="21:30:00" />
+				<param name="openingTime" value="07:30:00" />
+				<param name="scoringThisActivityAtAll" value="false" />
+				<param name="typicalDuration" value="01:30:00" />
+			</parameterset>
+			<parameterset type="activityParams" >
+				<param name="activityType" value="ride interaction" />
+				<param name="scoringThisActivityAtAll" value="false" />
+				<param name="typicalDuration" value="undefined" />
+			</parameterset>
+			<parameterset type="modeParams" >
+				<param name="mode" value="car" />
+			</parameterset>
+			<parameterset type="modeParams" >
+				<param name="mode" value="pt" />
+			</parameterset>
+			<parameterset type="modeParams" >
+				<param name="mode" value="walk" />
+			</parameterset>
+			<parameterset type="modeParams" >
+				<param name="mode" value="bike" />
+			</parameterset>
+			<parameterset type="modeParams" >
+				<param name="mode" value="ride" />
+			</parameterset>
+			<parameterset type="modeParams" >
+				<param name="mode" value="other" />
+			</parameterset>
+		</parameterset>
+	</module>
+	<module name="vehicles" >
+		<param name="vehiclesFile" value="evehicles.xml" />
+	</module>
+
+</config>
